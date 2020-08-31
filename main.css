@@ -1,0 +1,18 @@
+* {
+    font-family: monospace;
+    background-color:#1f1f1f;
+    color: #f1f1f1;
+}
+
+.blue {color:#00aaff}
+.lightblue {color:#80c2e4}
+.purple{color:#c661b3}
+.green {color:#00ffaa}
+.orange {color:#cb7961}
+.board-area {
+    position: absolute;
+    border:1px solid #ffffff;
+}
+.board-areaheader {
+    border:1px solid #919191;
+}

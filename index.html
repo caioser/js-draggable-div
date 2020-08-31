@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Caderno</title>
+    <link rel='stylesheet' type='text/css' href='main.css'>
+</head>
+<body>
+    <span class="blue">Caio</span> <span class="green">Sergio</span><br>
+<div class="board-area" id='0' onmouseover=selectId(this.id) onmousedown=toTopZindex(this.id)>
+    <div class="board-areaheader">Drag0</div>
+<div><pre>
+&lt;<span class='blue'>?php</span>
+<span class='lightblue'>$tipo</span> = <span class='orange'>'texto'</span>;
+
+<span class='purple'>switch</span>(<span class='lightblue'>$tipo</span>) {
+    case 'foto';
+        echo 'Exibindo FOTO';
+        break;
+    case 'vídeo';
+        echo 'Exibindo VÍDEO';
+        break;
+    case 'texto';
+        echo 'Exibindo TEXTO';
+        break;
+}
+</pre></div>
+</div>
+
+<div class="board-area" id='1' onmouseover=selectId(this.id) onmousedown=toTopZindex(this.id)>
+    <div class="board-areaheader">Drag1</div>
+<div><pre>
+&lt;<span class='blue'>?php</span>
+<span class='lightblue'>$tipo</span> = <span class='orange'>'texto'</span>;
+
+<span class='purple'>switch</span>(<span class='lightblue'>$tipo</span>) {
+    case 'foto';
+        echo 'Exibindo FOTO';
+        break;
+    case 'vídeo';
+        echo 'Exibindo VÍDEO';
+        break;
+    case 'texto';
+        echo 'Exibindo TEXTO';
+        break;
+}
+</pre></div>
+</div>
+
+<div class="board-area" id='2' onmouseover=selectId(this.id) onmousedown=toTopZindex(this.id)>
+    <div class="board-areaheader">Drag2</div>
+<div><pre>
+&lt;<span class='blue'>?php</span>
+<span class='lightblue'>$tipo</span> = <span class='orange'>'texto'</span>;
+
+<span class='purple'>switch</span>(<span class='lightblue'>$tipo</span>) {
+    case 'foto';
+        echo 'Exibindo FOTO';
+        break;
+    case 'vídeo';
+        echo 'Exibindo VÍDEO';
+        break;
+    case 'texto';
+        echo 'Exibindo TEXTO';
+        break;
+}
+</pre></div>
+</div>
+
+
+    <!--<script src='test.js'></script>-->
+    <script>
+        var board = document.getElementsByClassName('board-area');
+        var j = board.length - 1;
+        var queue = [];
+        for (let a = 0; a <= j; a++) {
+            board[a].style.zIndex = a;
+            queue.push(a);
+        }
+        selectId(j);
+
+        function toTopZindex(boardId) {
+            for (let i = 0; i <= j; i++) {
+                board[i].style.zIndex--
+            }
+            board[boardId].style.zIndex = j;
+
+            for (let i = 0; i<=j; i++) {
+                queue[i] = board[i].style.zIndex;
+            }
+            console.log(queue);
+        }
+
+        function selectId(i) {
+            //Make the DIV element draggagle:
+            dragElement(board[i]);
+            
+            function dragElement(elmnt) {
+            var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                if (document.getElementsByClassName(elmnt.className + "header")[i]) {
+                    /* if present, the header is where you move the DIV from:*/
+                    document.getElementsByClassName(elmnt.className + "header")[i].onmousedown = dragMouseDown;
+                } else {
+                    /* otherwise, move the DIV from anywhere inside the DIV:*/
+                    elmnt.onmousedown = dragMouseDown;
+                }
+            
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // get the mouse cursor position at startup:
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    // call a function whenever the cursor moves:
+                    document.onmousemove = elementDrag;
+                }
+                
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // calculate the new cursor position:
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // set the element's new position:
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+                
+                function closeDragElement() {
+                    /* stop moving when mouse button is released:*/
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+        }
+        </script>
+</body>
+</html>
